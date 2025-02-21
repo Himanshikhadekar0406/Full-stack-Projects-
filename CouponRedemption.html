@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-commerce Coupon Redemption</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+        }
+        h2 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+        }
+        button:hover {
+            background: #218838;
+        }
+        h3 {
+            color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>E-commerce Coupon Redemption</h2>
+        
+        <label for="orderAmount">Order Amount ($):</label>
+        <input type="number" id="orderAmount" placeholder="Enter order amount">
+        
+        <label for="couponCode">Select Coupon:</label>
+        <select id="couponCode">
+            <option value="NONE">No Coupon</option>
+            <option value="DISCOUNT10">DISCOUNT10 (10% off on $500+)</option>
+            <option value="FREESHIP">FREESHIP (Free shipping on $200+)</option>
+        </select>
+        
+        <button onclick="applyCoupon()">Apply Coupon</button>
+        
+        <h3 id="finalPrice">Final Price: $0.00</h3>
+    </div>
+
+    <script>
+        function applyCoupon() {
+            let orderAmount = parseFloat(document.getElementById("orderAmount").value);
+            let couponCode = document.getElementById("couponCode").value;
+            let finalPrice = orderAmount;
+
+            if (couponCode === "DISCOUNT10" && orderAmount > 500) {
+                finalPrice = orderAmount * 0.90; // 10% discount
+            } else if (couponCode === "FREESHIP" && orderAmount > 200) {
+                finalPrice = orderAmount; // Free shipping, but no discount
+            } 
+
+            document.getElementById("finalPrice").innerText = `Final Price: $${finalPrice.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>

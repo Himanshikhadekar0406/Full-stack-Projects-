@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Traffic Light System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #e3f2fd;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #42a5f5, #1e88e5);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+        select, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 90%;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #ffffff;
+            color: #1565c0;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #bbdefb;
+        }
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Smart Traffic Light System</h2>
+        <select id="trafficDensity">
+            <option value="Heavy Traffic">Heavy Traffic</option>
+            <option value="Moderate Traffic">Moderate Traffic</option>
+            <option value="Light Traffic">Light Traffic</option>
+        </select>
+        <button onclick="calculateGreenTime()">Get Green Light Duration</button>
+        <p id="result"></p>
+    </div>
+    
+    <script>
+        function trafficLightControl(density) {
+            if (density === "Heavy Traffic") {
+                return 60;
+            } else if (density === "Moderate Traffic") {
+                return 40;
+            } else if (density === "Light Traffic") {
+                return 20;
+            } else {
+                return "Invalid traffic density";
+            }
+        }
+
+        function calculateGreenTime() {
+            let density = document.getElementById("trafficDensity").value;
+            let greenTime = trafficLightControl(density);
+            document.getElementById("result").innerText = `Green Light Duration: ${greenTime} seconds`;
+        }
+    </script>
+</body>
+</html>

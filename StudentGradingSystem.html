@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grading System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 90%;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            background: #f8f9fa;
+            color: #333;
+        }
+        button {
+            margin: 10px;
+            padding: 12px;
+            width: 95%;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffffff;
+            color: #d9534f;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #f7c6c7;
+        }
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Student Grading System</h2>
+        <input type="number" id="marks" placeholder="Enter Marks (0-100)">
+        <input type="number" id="attendance" placeholder="Enter Attendance (%)">
+        <button onclick="calculateStudentGrade()">Calculate Grade</button>
+        <p id="result"></p>
+    </div>
+    
+    <script>
+        function calculateGrade(marks, attendance) {
+            if (attendance > 90) {
+                marks += 5;
+            }
+            if (marks >= 90) {
+                return "A";
+            } else if (marks >= 80) {
+                return "B";
+            } else if (marks >= 70) {
+                return "C";
+            } else if (marks >= 60) {
+                return "D";
+            } else {
+                return "F";
+            }
+        }
+
+        function calculateStudentGrade() {
+            let marks = parseFloat(document.getElementById("marks").value);
+            let attendance = parseFloat(document.getElementById("attendance").value);
+            
+            if (isNaN(marks) || isNaN(attendance) || marks < 0 || marks > 100 || attendance < 0 || attendance > 100) {
+                document.getElementById("result").innerText = "Please enter valid marks and attendance.";
+                return;
+            }
+            
+            let finalGrade = calculateGrade(marks, attendance);
+            document.getElementById("result").innerText = `Final Grade: ${finalGrade}`;
+        }
+    </script>
+</body>
+</html>

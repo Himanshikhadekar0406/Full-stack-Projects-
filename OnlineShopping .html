@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Shopping Discount</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #eef2f3;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #a8e063, #56ab2f);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            color: white;
+        }
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 90%;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            background: #f8f9fa;
+            color: #333;
+        }
+        button {
+            margin: 10px;
+            padding: 12px;
+            width: 95%;
+            border: none;
+            border-radius: 5px;
+            background-color: #ffffff;
+            color: #28a745;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #d4edda;
+        }
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Shopping Discount Calculator</h2>
+        <input type="number" id="orderAmount" placeholder="Enter Order Amount">
+        <button onclick="calculatePrice()">Calculate Final Price</button>
+        <p id="result"></p>
+    </div>
+    
+    <script>
+        function calculateFinalAmount(orderAmount) {
+            if (isNaN(orderAmount) || orderAmount <= 0) {
+                return "Please enter a valid order amount.";
+            }
+
+            let discount = 0;
+            if (orderAmount > 1000) {
+                discount = 0.2;
+            } else if (orderAmount >= 500) {
+                discount = 0.1;
+            }
+            
+            let discountedPrice = orderAmount - (orderAmount * discount);
+            let shippingCost = discountedPrice > 50 ? 0 : 10;
+            let finalAmount = discountedPrice + shippingCost;
+            
+            return `Final Payable Amount: $${finalAmount.toFixed(2)} (Discount: $${(orderAmount * discount).toFixed(2)}, Shipping: $${shippingCost})`;
+        }
+
+        function calculatePrice() {
+            let orderAmount = parseFloat(document.getElementById("orderAmount").value);
+            let resultText = calculateFinalAmount(orderAmount);
+            document.getElementById("result").innerText = resultText;
+        }
+    </script>
+</body>
+</html>

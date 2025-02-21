@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM Withdrawal System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            margin: 10px;
+            padding: 10px;
+            width: 90%;
+            border: 1px solid #007BFF;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        button {
+            margin: 10px;
+            padding: 10px;
+            width: 95%;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 style="color: #007BFF;">ATM Withdrawal</h2>
+        <input type="number" id="balance" placeholder="Enter Balance">
+        <input type="number" id="amount" placeholder="Enter Amount">
+        <input type="password" id="pin" placeholder="Set PIN">
+        <input type="password" id="enteredPin" placeholder="Enter PIN">
+        <button onclick="withdrawMoney()">Withdraw</button>
+        <p id="result"></p>
+    </div>
+    
+    <script>
+        function atmWithdrawal(balance, amount, pin, enteredPin) {
+            if (enteredPin !== pin) {
+                return "Incorrect PIN";
+            }
+            if (amount > balance) {
+                return "Insufficient Funds";
+            }
+            if (amount % 100 !== 0) {
+                return "Enter amount in multiples of 100";
+            }
+            return `Withdrawal successful! New Balance: $${balance - amount}`;
+        }
+
+        function withdrawMoney() {
+            let balance = parseFloat(document.getElementById("balance").value);
+            let amount = parseFloat(document.getElementById("amount").value);
+            let pin = document.getElementById("pin").value;
+            let enteredPin = document.getElementById("enteredPin").value;
+            
+            let result = atmWithdrawal(balance, amount, pin, enteredPin);
+            document.getElementById("result").innerText = result;
+        }
+    </script>
+</body>
+</html>
